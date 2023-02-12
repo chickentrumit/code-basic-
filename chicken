@@ -1,0 +1,161 @@
+Bài 1:
+Cho bài toán tìm ước số chung lớn nhất của 2 số nguyên a và b. Viết chương trình bằng phương pháp hàm cho bài toán trên.
+
+#include<stdio.h>
+int ucln(int a, int b) {//tim uoc chung lon nhat cua 2 so a va b
+    int tmp;
+    while(b != 0) {
+        tmp = a % b;
+        a = b;
+        b = tmp;
+    }
+    return a;
+}
+int main(){
+	int a,b;
+	printf("nhap a:"); scanf("%d",&a);
+	printf("nhap b:"); scanf("%d",&b);
+	printf("uoc chung lon nhat cua cua 2 so a va b la:%d",ucln(a,b));
+}
+
+//ba2:Viết chương trình nhập vào số tự nhiên n. Tìm tất cả bộ 3 các số tự nhiên a, b, c sao cho a2 + b2 = c2, với a <=b<=c<=n;
+#include<stdio.h>
+//duyet binh thuong
+void solve(int n){
+	printf("bo 3 so thoa man dk de bai la\n");
+	for(int i=1;i<=n;++i){
+		for(int j=1;j<=n;++j){
+			for(int k=1;k<=n;++k){
+				if(i*i+j*j==k*k){
+					printf("%d %d %d\n",i,j,k);
+				}
+			}
+		}
+	}
+}
+int main(){
+	int n; printf("nhap n:"); scanf("%d",&n);
+	solve(n);
+}
+
+Bài 3: 
+Vi?t chuong trình   nh?p vào s? t? nhiên n. In ra dãy s? Fibonaci nh? hon n. Trong dó: F0 = F1
+= 1; Fn = Fn-1 + Fn-2.
+#include<stdio.h>
+int F[100];
+void fibo(int n){
+	F[0]=0,F[1]=1;
+	for(int i=2;i<=92;++i){
+		F[i]=F[i-1]+F[i -2];// de quy co nho
+	}
+	printf("cac so fibo nho hon n la:");
+	for(int i=0;i<=92;++i){
+		if(F[i]>=n) return;
+		printf("%d ",F[i]);
+	}
+}
+int main(){
+	int n; printf("nhap n:"); scanf("%d",&n);
+	fibo(n);
+}
+
+Bài 4: Viết chương trình   nhập vào số tự nhiên n. Liệt kê tất cả các số nguyên tố nhỏ hơn n.
+#include<stdio.h>
+//liet ke snt cach don gian
+int checkprime(long long n){
+	if(n<2) return 0;
+	for(int i=2;i*i<=n;++i){
+		if(n%i==0) return 0;
+	}
+	return 1;
+}
+int main(){
+	int n; printf("nhap n:"); scanf("%d",&n);
+	printf("liet ke snt:");
+	for(int i=2;i<n;++i){
+		if(checkprime(i)){
+			printf("%d ",i);
+		}
+	}
+}
+
+Bài 5: Viết chương trình   nhập vào số tự nhiên n. Liệt kê tất cả các số nguyên tố nhỏ hơn n dùng sàng 
+Estheven.
+#include<stdio.h>
+//sang so nguyen to
+const int P=1000007;
+int prime[P]; //khoi tao mang 1e6+7 phan tu
+void sang(){
+	for(long long i=0;i<=P;++i){
+		prime[i]=1; //gia su cho all la so nguyen to
+	}
+	for(long long i=2;i*i<=P;++i){
+		if(prime[i]){//kiem tra neu la so nguyen to thi duyet cac boi cua so so nguyen to do
+			for(int j=i*i;j<=P;j+=i){
+				prime[j]=0; // cho tat ca boi cua no ko phai la so nguyen to
+			}
+		}
+	}
+}
+int main(){
+	sang();
+	int n; printf("nhap n:"); scanf("%d",&n);
+	printf("liet ke snt:");
+	for(int i=2;i<n;++i){
+		if(prime[i]){
+			printf("%d ",i);
+		}
+	}
+}
+
+Bài 6: Viết chương trình   nhập vào số tự nhiên n. Liệt kê tất cả các số nguyên tố nhỏ hơn n nằm trong 
+cùng bậc hàng chục dùng sàng Estheven (Ví  dụ: 11, 13, 15, 17).
+#include<stdio.h>
+//sang so nguyen to
+const int P=1000007;
+int prime[P]; //khoi tao mang 1e6+7 phan tu
+void sang(){
+	for(long long i=0;i<=P;++i){
+		prime[i]=1; //gia su cho all la so nguyen to
+	}
+	for(long long i=2;i*i<=P;++i){
+		if(prime[i]){//kiem tra neu la so nguyen to thi duyet cac boi cua so so nguyen to do
+			for(int j=i*i;j<=P;j+=i){
+				prime[j]=0; // cho tat ca boi cua no ko phai la so nguyen to
+			}
+		}
+	}
+}
+int main(){
+	sang();
+	int n; printf("nhap n:"); scanf("%d",&n);
+	printf("liet ke snt:");
+	for(int i=10;i<100;++i){
+		if(i>=100) return 0;
+		if(prime[i]){
+			printf("%d ",i);
+		}
+	}
+}
+
+bai7:Cho số nguyên dương n. VCT phân tích n ra thành các thừa số nguyên tố. Ví dụ:
+n=12=2*2*3T.
+#include<stdio.h>
+//phan tich thua so nguyen to cach binh thuong
+void phantich(int n){
+	printf("phan tich n thanh cac thua so nguyen to la:");
+	for(int i=2;i*i<=n;++i){
+		while(n%i==0){
+			printf("%d ",i);
+			n/=i;
+		}
+	}
+	if(n!=1) printf("%d",n);
+}
+int main(){
+	int n; printf("nhap n:"); scanf("%d",&n);
+	phantich(n);
+}
+Cách nộp bài: Tạo thư mục HoTenKhongDau (ví dụ: BuiDanhHuong), copy các file bai1.cpp ->bai7.cpp vào thư mục nói trên, nén lại và upload để nộp.
+
+Deadline: 23/02/2023
